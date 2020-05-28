@@ -27,7 +27,7 @@ class Layer:
         self.max_size_log = max_size_log
         self.log_path = log_path
         self.pin = pin
-        self.acl_path = './acl_'+str(self.access_control.getContract())+'.pkl'
+        self.acl_path = './acl_'+str(self.access_control.getContract().contract)+'.pkl'
         self.lock = threading.Lock()
         self.file_log_path = self.__get_new_log_file() 
         self.acl_dict = self.__load_acl()
