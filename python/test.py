@@ -27,7 +27,7 @@ class Layer:
         self.max_size_log = max_size_log
         self.log_path = log_path
         self.pin = pin
-        self.acl_path = './acl_'+str(self.access_control.getContract().contract)+'.pkl'
+        self.acl_path = './acl_'+str(self.access_control.getSmartContractAddress())+'.pkl'
         self.lock = threading.Lock()
         self.file_log_path = self.__get_new_log_file() 
         self.acl_dict = self.__load_acl()
@@ -141,7 +141,7 @@ smart_contract_address = "0xC1D3f319947bD3C79D8F63B3aE4cB3126181ED0c"
 ipfs_http = IPFS_http('http://127.0.0.1:5001/api/v0/')
 access_control = AccessControl.Factory(providerURL, smart_contract_address, contract_abi.abi)
 
-layer = Layer(ipfs_http, access_control, 50, pin=True)
+layer = Layer(ipfs_http, access_control, 50, pin=True, log_path='./logs/')
 #Abbiamo gli event, ed ok.
 #La lista degli accessi invece, deve poter essere aggiornabile
 #ipfs anche sul cellulare? Pinnano i loro che gli interessano

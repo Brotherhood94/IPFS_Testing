@@ -8,6 +8,7 @@ class AccessControl:
     # PrivateVariable
     __contract = None
     __providerURL = None
+    __address = None
 
     @staticmethod
     def Factory(providerURL, smart_contract_address, abi):
@@ -23,6 +24,7 @@ class AccessControl:
         else:
             AccessControl.__instance = self
             AccessControl.__providerURL = providerURL
+            AccessControl.__address = smart_contract_address
             AccessControl.__settingUp(self, smart_contract_address, abi)
 
     # Private
@@ -33,6 +35,9 @@ class AccessControl:
 
     def getContract(self):
         return AccessControl.__contract
+
+    def getSmartContractAddress(self):
+        return AccessControl.__address
 
     def getProvider(self):
         return AccessControl.__providerURL
