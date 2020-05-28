@@ -7,6 +7,7 @@ from IPFS_http import IPFS_http
 
 import pickle 
 
+from eth_account import Account
 from access_control import AccessControl
 import contract_abi
 import threading
@@ -150,7 +151,24 @@ for i in range(1, 30):
     layer.ipfs_log('Ciao')
 
 
+acct = Account.create('KEYSMASH FJAFJKLDSKF7JKFDJ 1530')
+print(acct.address)
+wallet = Account.encrypt(acct.privateKey, 'password')
+print(wallet)
+with open ('./my-account','w') as keyfile:
+    keyfile.write(json.dumps(wallet))
 
+with open ('./my-account', 'r') as keyfile:
+    keyfile_json = keyfile.read()
+
+print('KeyFile')
+print(keyfile_json)
+privateKey = Account.decrypt(keyfile_json, 'password')
+print('Private Key')
+print(privateKey)
+
+acct = Account.privateKeyToAccount(privateKey)
+print(acct)
 
 '''
 res = requests.post("http://127.0.0.1:5001/api/v0/pubsub/sub?arg=foo", stream=True)
